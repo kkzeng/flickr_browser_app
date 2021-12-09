@@ -23,16 +23,23 @@ class FlickrRecyclerViewAdapter(private var photoList: List<Photo>):
     }
 
     override fun onBindViewHolder(holder: FlickrImageViewHolder, position: Int) {
-        // Load photo from the URL
-        // ImageView
-        val photoItem = photoList[position]
-        Picasso.get()
-            .load(photoItem.image)
-            .placeholder(R.drawable.img_placeholder)
-            .error(R.drawable.img_placeholder)
-            .into(holder.thumbnail)
+        // Display the placeholder and an error msg for the user if no photos to display
+        if(photoList.isEmpty()) {
+            holder.thumbnail.setImageResource(R.drawable.img_placeholder)
+            holder.title.setText(R.string.no_images_found_msg)
+        }
+        else {
+            // Load photo from the URL
+            // ImageView
+            val photoItem = photoList[position]
+            Picasso.get()
+                .load(photoItem.image)
+                .placeholder(R.drawable.img_placeholder)
+                .error(R.drawable.img_placeholder)
+                .into(holder.thumbnail)
 
-        holder.title.text = photoItem.title
+            holder.title.text = photoItem.title
+        }
     }
 
     fun loadNewData(newPhotoList: List<Photo>) {
@@ -45,6 +52,7 @@ class FlickrRecyclerViewAdapter(private var photoList: List<Photo>):
     }
 
     override fun getItemCount(): Int {
+        if(photoList.isEmpty()) return 1
         return photoList.size
     }
 }

@@ -8,4 +8,5 @@
     <string name="title_activity_photo_details">PhotoDetailsActivity</string>
     <string name="photo_title">Title %s</string>
     <string name="search_hint">Search for Flickr photos</string>
+    <string name="no_images_found_msg">"No images were found.\nPlease try different tags."</string>
 </resources>
